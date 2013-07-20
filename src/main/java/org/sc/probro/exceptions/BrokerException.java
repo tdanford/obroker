@@ -1,0 +1,93 @@
+/*
+	Copyright 2010 Massachusetts General Hospital
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+*/
+package org.sc.probro.exceptions;
+
+import java.util.*;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.*;
+
+public class BrokerException extends Exception {
+	
+	public static Map<Integer,String> ERROR_NAMES; 
+	
+	static {
+		ERROR_NAMES = new TreeMap<Integer,String>();
+		ERROR_NAMES.put(HttpServletResponse.SC_BAD_REQUEST, "Bad Request");
+		ERROR_NAMES.put(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+		ERROR_NAMES.put(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
+		ERROR_NAMES.put(HttpServletResponse.SC_GONE, "Gone");
+		ERROR_NAMES.put(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, "Request Entity Too Large");
+		ERROR_NAMES.put(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Method Not Allowed");
+		ERROR_NAMES.put(HttpServletResponse.SC_CONFLICT, "Conflict");
+		ERROR_NAMES.put(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE, "Unsupported Media Type");
+		ERROR_NAMES.put(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+	}
+	
+	private int code; 
+	private String name, description;
+	private Throwable throwable;
+	
+	public BrokerException(Throwable t) { 
+		this(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, t);
+	}
+
+	public BrokerException(int code, String description) { 
+		super(description);
+		this.code = code;
+		name = ERROR_NAMES.get(code);
+		this.description = description;
+		throwable = null;
+	}
+	
+	public BrokerException(int code, Throwable t) { 
+		super(t.getMessage(), t);
+		this.code = code;
+		this.description = t.getMessage();
+		this.name = ERROR_NAMES.get(code);
+		throwable = t;
+	}
+	
+	public int getCode() { return code; }
+	public String getName() { return name; }
+	public String getDescription() { return description; }
+	
+	public Throwable getThrowable() { return throwable; }
+	
+	public boolean isFromThrowable() { return throwable != null;  }
+	
+	public boolean isServerError() { 
+		return HttpServletResponse.SC_INTERNAL_SERVER_ERROR == code;
+	}
+	
+	public BrokerException format(Object... args) { 
+		return new BrokerException(code, String.format(description, args));
+	}
+
+	public JSONObject asJSON() { 
+		JSONObject obj = new JSONObject();
+		try { 
+			obj.put("error_code", code);
+			obj.put("error_name", name);
+			obj.put("error_description", description);
+		} catch(JSONException e) { 
+			throw new IllegalStateException(e);
+		}
+		
+		return obj;
+	}
+}

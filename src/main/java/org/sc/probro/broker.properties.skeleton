@@ -1,0 +1,19 @@
+
+## relative path to the directory with the static resources.
+resourceBase=FILLMEIN
+
+## port at which the server will run.
+port=8080
+
+## relative path to Derby DB file.
+dbPath=FILLMEIN
+
+## Paths to the Lucene Index files
+luceneIndex=FILLMEIN
+biothesaurusIndex=FILLMEIN
+
+## Paths to other data resources
+uniprotMapping=FILLMEIN
+
+## URL for the OBO Sparql Endpoint
+obo_sparql=http://sparql.obo.neurocommons.org/sparql
