@@ -1,0 +1,146 @@
+<html>
+
+<head>
+<title>PRO Broker New Request Form</title>
+
+<script src="/jquery-1.4.2.js" type ="text/javascript"></script>
+<script src="/json2.js" type ="text/javascript"></script>
+<script src="/jquery-ui/js/jquery-ui-1.8.4.custom.min.js" type = "text/javascript"></script>
+<script src="/broker.js" type = "text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	var get_params = function() { 
+		return Broker.get_params(window.location.href);
+	};
+
+	var load_request = function(request_id) { 
+		$.getJSON('/request/' + request_id + '/',
+			function(requestdata) { 
+				var request = requestdata.request;
+				var metadata = requestdata.metadata;
+				var i;
+
+				$('#requestform [name="search_text"]').attr('value', request.search_text);		
+				$('#requestform [name="context"]').attr('value', request.context);		
+				$('#requestform [name="comment"]').attr('value', request.comment);		
+				$('#requestform [name="provenance"]').attr('value', request.provenance);		
+				$('#requestform [name="parent_request"]').attr('value', request.request_id);		
+
+				//$('#requestform [name="date_submitted"]').attr('value', request.date_submitted);		
+				//$('#requestform [name="status"]').attr('value', request.status);
+				//$('#requestform #requiredfields').append( '<tr><td>Modify Status:</td><td><input type="text" style="width: 100%;" ' + 'name="new_status" value="' + request['status'] + '" /> </td></tr>');
+
+				for(i = 0; i < metadata.length; i++) { 
+					var md = metadata[i];
+					var name = 'metadata_' + md.metadata_key;
+					var md_input = $('[name="' + name + '"]');
+					Broker.debug(name + '=' + md.metadata_value);
+
+					if(name === 'metadata_type') { 
+						md_input.removeAttr('checked');
+						var checkselect = 'input[value="' + md.metadata_value + '"]';
+						Broker.debug(checkselect);
+						Broker.debug('Matched: ' + $(checkselect).length);
+						$(checkselect).attr('checked', 'true');
+					} else { 
+						if(md_input.length > 0) { 
+							md_input.attr('value', md.metadata_value);
+						}
+					}
+				}
+
+				$.get('/states?format=fieldset&from=' + request['status'], 
+					function(statusform) { 
+						$('#tdoptional').append(statusform);
+					});
+
+				$('#requestform').removeAttr('action').attr('action', '/request/' + request_id + '/');
+			});
+	};
+
+	var params = get_params();
+	if(params['request_id']) { 
+		load_request(params['request_id']);
+	} else { 
+		$('#tdoptional').append('<input type="hidden" name="status" value="PENDING" />');
+	}
+});
+</script>
+
+<style>
+#mainbody { 
+	margin-left: auto; 
+	margin-right: auto;
+	width: 80%;
+}
+body { 
+	background-color: #ffffff;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="mainbody">
+<div id="header"> <h3 style="text-align: center;">PRO New Term Request</h3> </div> 
+
+<div id="form">
+<form id="requestform" action="/requests" method="POST">
+	<table style="width: 100%;">
+	<tr>
+	<td style="width: 50%; vertical-align: top;">
+		<fieldset id="requiredfieldset"><legend>Request Information</legend>
+		<table id="requiredfields" style="width: 100%;">
+			<tr><td>Search:</td> <td><input style="width: 100%;" type="text" name="search_text" /> </td></tr>
+			<tr><td>Context:</td><td> <textarea name="context" rows="5" style="width: 100%;" ></textarea> </td><tr>
+			<tr><td>Comment:</td><td> <textarea name="comment" rows="5" style="width: 100%;" ></textarea> </td><tr>
+			<tr><td>Provenance (URL):</td> <td><input style="width: 100%;" type="text" name="provenance" /> </td></tr>
+		</table>
+		<input type="hidden" name="ontology_id" value="1" />
+		<input type="hidden" name="creator_id" value="1" />
+		<input type="hidden" name="modified_by" value="1" />
+		<input type="hidden" name="parent_request" value="1" />
+		<input type="hidden" id="dateinput" name="date_submitted" /> 
+		<script type="text/javascript">
+			$('#dateinput').attr('value', Broker.date_string());
+		</script>
+		</fieldset>
+	</td>
+
+	<td id="tdoptional" style="vertical-align: top;">
+		<fieldset>
+		<legend>Optional Metadata</legend>
+			<table>
+				<tr><td>Region (Coordinates): </td><td> <input type="text" name="metadata_coordinates" /></td></tr>
+				<tr><td>UniProtKB Accession: </td><td> <input type="text" name="metadata_uniprot" /></td></tr>
+				<tr><td>Modification:</td><td> <input type="text" name="metadata_modification" /></td></tr>
+				<tr><td>Organism:</td><td> <input type="text" name="metadata_organism" /></td></tr>
+			</table>
+			<fieldset>
+			<legend>PRO Type</legend>
+				<input type="radio" name="metadata_type" value="protein" checked="true">protein</input><br>
+				<input type="radio" name="metadata_type" value="exon"/>exon</input><br>
+				<input type="radio" name="metadata_type" value="site"/>site</input><br>
+				<input type="radio" name="metadata_type" value="modified_site"/>modified_site</input><br>
+				<input type="radio" name="metadata_type" value="variation_site"/>variation_site</input><br>
+				<input type="radio" name="metadata_type" value="cleavage_product"/>cleavage_product</input><br>
+			</fieldset>
+		</fieldset>
+	</td>
+	<td style="vertical-align: top;">
+	</td>
+	</tr>
+	</table>
+	<input class="submitbutton" type="submit" value="Submit"/>	
+</form>
+</div>
+
+</div>
+
+<div id="debug">
+</div>
+
+</body>
+</html>
