@@ -15,6 +15,7 @@
 */
 package org.sc.probro.json;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import tdanford.json.schema.SchemaEnv;
@@ -23,7 +24,7 @@ public class ValidatedJSON extends JSONObject {
 	
 	private String schemaName;
 
-	public ValidatedJSON(String schemaName, JSONObject obj) { 
+	public ValidatedJSON(String schemaName, JSONObject obj) throws JSONException {
 		super(obj, JSONObject.getNames(obj));
 		this.schemaName = schemaName;
 	}
