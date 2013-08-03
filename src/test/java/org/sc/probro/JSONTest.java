@@ -48,7 +48,7 @@ public class JSONTest {
 	}
 	
 	public void testContains(JSONType type, Object value) { 
-		assertTrue(type.explain(value), type.contains(value));
+		assertTrue(type.contains(value), type.explain(value));
 	}
 }
 

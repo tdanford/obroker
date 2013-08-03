@@ -118,15 +118,13 @@ public class BrokerStart {
 	
 	public BrokerStart(int port, String resourceBase) { 
 		server = new Server(port);
-        Map<String,String> params = new TreeMap<String,String>();
-        params.put("org.apache.jasper.Constants.SERVLET_CLASSPATH", "org.sc.probro.jsps");
-        params.put("org.apache.jasper.servlet.JspServlet.classpath", "org.sc.probro.jsps");
-                
+
         context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
-        context.setInitParams(params);
-        
+        context.setInitParameter("org.apache.jasper.Constants.SERVLET_CLASSPATH", "org.sc.probro.jsps");
+        context.setInitParameter("org.apache.jasper.servlet.JspServlet.classpath", "org.sc.probro.jsps");
+
         // This is the reaper thread for the Apache FileUpload utility, which cleans out 
         // the temporary files which have been uploaded.
         // See 
