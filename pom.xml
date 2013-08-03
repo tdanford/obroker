@@ -121,7 +121,12 @@
 			<version>7.0.0.pre5</version>
 		</dependency>
             
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
             
-
     </dependencies>
 </project>
