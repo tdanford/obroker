@@ -22,12 +22,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.sc.probro.BrokerProperties;
 
 public class ResetServlet extends BrokerServlet {
-	
-	public ResetServlet(BrokerProperties props) { 
+
+    private static Logger Log = Logger.getLogger(ResetServlet.class);
+
+    public ResetServlet(BrokerProperties props) {
 		super(props);
 	}
 

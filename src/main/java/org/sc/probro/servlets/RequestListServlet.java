@@ -23,7 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +34,8 @@ import org.sc.probro.exceptions.*;
 import tdanford.json.schema.JSONType;
 
 public class RequestListServlet extends BrokerServlet {
+
+    private static Logger Log = Logger.getLogger(RequestListServlet.class);
 
 	public RequestListServlet(BrokerProperties props) {
 		super(props);

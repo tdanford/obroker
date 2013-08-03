@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.*;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,8 +43,10 @@ import org.sc.probro.lucene.ProteinSearcher;
 import org.sc.probro.servlets.RequestStateServlet;
 
 public class LocalBroker implements Broker {
-	
-	private BrokerModel model;
+
+    private static Logger Log = Logger.getLogger(LocalBroker.class);
+
+    private BrokerModel model;
 	private String luceneIndexPath;
 	
 	public LocalBroker(BrokerProperties props, BrokerModel m) {
@@ -487,7 +489,6 @@ public class LocalBroker implements Broker {
 		}
 	}
 
-	@Override
 	public User[] listUsers(UserCredentials user, String ontology)
 			throws BrokerException {
 		try {

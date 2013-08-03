@@ -28,7 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.sc.probro.Broker;
 import org.sc.probro.BrokerProperties;
 import org.sc.probro.BulkTable;
@@ -52,8 +52,10 @@ import org.sc.probro.exceptions.BrokerException;
  *
  */
 public class BulkRequestServlet extends BrokerServlet {
-	
-	public BulkRequestServlet(BrokerProperties ps) { 
+
+    public static Logger Log = Logger.getLogger(BulkRequestServlet.class);
+
+    public BulkRequestServlet(BrokerProperties ps) {
 		super(ps);
 	}
 

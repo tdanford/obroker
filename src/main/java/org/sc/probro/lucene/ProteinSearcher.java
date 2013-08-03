@@ -18,6 +18,7 @@ package org.sc.probro.lucene;
 import java.util.*;
 import java.io.*;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.TokenStream;
@@ -43,14 +44,15 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
-import org.eclipse.jetty.util.log.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ProteinSearcher {
-	
-	private Analyzer analyzer;
+
+    private static Logger Log = Logger.getLogger(ProteinSearcher.class);
+
+    private Analyzer analyzer;
 	private IndexReader reader;
 	private IndexSearcher search;
 	private Directory dir;

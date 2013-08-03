@@ -25,7 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -34,6 +34,8 @@ import org.sc.probro.data.*;
 import org.sc.probro.exceptions.*;
 
 public class OntologyServlet extends BrokerServlet {
+
+    private static Logger Log = Logger.getLogger(OntologyServlet.class);
 
 	public OntologyServlet(BrokerProperties props) {
 		super(props);

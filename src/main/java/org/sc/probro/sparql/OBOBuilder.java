@@ -18,7 +18,7 @@ package org.sc.probro.sparql;
 import java.util.*;
 import java.io.*;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.sc.obo.OBOOntology;
 import org.sc.obo.OBOParser;
 
@@ -27,6 +27,8 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class OBOBuilder {
+
+    private static Logger Log = Logger.getLogger(OBOBuilder.class);
 
 	private OBOSparql oboSparql;
 	

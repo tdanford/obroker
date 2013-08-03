@@ -29,8 +29,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
-import org.eclipse.jetty.util.log.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,8 +52,10 @@ import org.sc.probro.lucene.ProteinSearcher;
  *
  */
 public class BiothesaurusQueryServlet extends SkeletonServlet {
-	
-	private File biothesaurusIndex;
+
+    public static Logger Log = Logger.getLogger(BiothesaurusQueryServlet.class);
+
+    private File biothesaurusIndex;
 	private File uniprotMappingFile;
 	
 	public BiothesaurusQueryServlet(BrokerProperties props) { 

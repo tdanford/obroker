@@ -41,7 +41,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileCleaningTracker;
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.sc.obo.*;
 import org.sc.probro.Broker;
 import org.sc.probro.BrokerProperties;
@@ -61,6 +61,8 @@ import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 public class IndexCreatorServlet extends BrokerServlet {
+
+    public static Logger Log = Logger.getLogger(IndexCreatorServlet.class);
 
 	private OBOSparql oboSparql;
 	

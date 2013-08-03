@@ -20,6 +20,7 @@ import java.util.regex.*;
 
 import java.io.*;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -41,14 +42,15 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.eclipse.jetty.util.log.Log;
 import org.sc.probro.BrokerProperties;
 import org.sc.probro.data.MetadataObject;
 import org.sc.probro.data.RequestObject;
 
 public class IndexCreator {
-	
-	public static void main(String[] args) throws IOException { 
+
+    public static Logger Log = Logger.getLogger(IndexCreator.class);
+
+    public static void main(String[] args) throws IOException {
 		BrokerProperties ps = new BrokerProperties();
 		File f = new File(ps.getLuceneIndex());
 

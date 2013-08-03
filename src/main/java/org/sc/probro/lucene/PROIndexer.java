@@ -20,6 +20,7 @@ import java.util.regex.*;
 
 import java.io.*;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -41,13 +42,14 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.eclipse.jetty.util.log.Log;
 import org.sc.probro.data.MetadataObject;
 import org.sc.probro.data.RequestObject;
 
 public class PROIndexer {
-	
-	private File indexFile;
+
+    private static Logger Log = Logger.getLogger(PROIndexer.class);
+
+    private File indexFile;
 	private Analyzer analyzer;
 	private IndexWriter writer;
 	private IndexReader reader;

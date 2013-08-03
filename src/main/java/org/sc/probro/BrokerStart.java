@@ -17,13 +17,13 @@ package org.sc.probro;
 
 import java.net.UnknownHostException;
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.Servlet;
 
 import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
 import org.apache.jasper.servlet.JspServlet;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NCSARequestLog;
 import org.eclipse.jetty.server.Server;
@@ -33,11 +33,12 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.servlet.ServletMapping;
-import org.eclipse.jetty.util.log.Log;
 import org.sc.probro.data.*;
 import org.sc.probro.servlets.*;
 
 public class BrokerStart {
+
+    private static Logger Log = Logger.getLogger(BrokerStart.class);
 	
 	public static String HOSTNAME = "localhost";
 	public static int PORT = 8080;

@@ -47,7 +47,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -59,8 +59,10 @@ import org.sc.probro.exceptions.BrokerException;
 import tdanford.json.schema.SchemaEnv;
 
 public abstract class SkeletonServlet extends HttpServlet {
-	
-	protected SchemaEnv schemaEnv;
+
+    private static Logger Log = Logger.getLogger(SkeletonServlet.class);
+
+    protected SchemaEnv schemaEnv;
 	
 	public SkeletonServlet() {
     	

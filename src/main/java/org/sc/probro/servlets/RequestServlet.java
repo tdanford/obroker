@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpUtils;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -34,6 +34,8 @@ import org.sc.probro.data.*;
 import org.sc.probro.exceptions.*;
 
 public class RequestServlet extends BrokerServlet {
+
+    private static Logger Log = Logger.getLogger(RequestServlet.class);
 
 	public RequestServlet(BrokerProperties props) {
 		super(props);

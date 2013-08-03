@@ -21,10 +21,12 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.*;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.sc.probro.exceptions.BadRequestException;
 
 public class BulkTable {
+
+    private static Logger Log = Logger.getLogger(BulkTable.class);
 
 	public Ontology ontology;
 	public ArrayList<String> columns;

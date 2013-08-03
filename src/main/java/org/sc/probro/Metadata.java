@@ -15,7 +15,7 @@
 */
 package org.sc.probro;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -23,6 +23,8 @@ import org.sc.probro.exceptions.BadRequestException;
 import org.sc.probro.exceptions.BrokerException;
 
 public class Metadata extends BrokerData {
+
+    private static Logger Log = Logger.getLogger(Metadata.class);
 
 	public String key, value;
 	

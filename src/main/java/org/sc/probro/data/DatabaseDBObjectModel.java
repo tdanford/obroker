@@ -15,6 +15,8 @@
 */
 package org.sc.probro.data;
 
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -29,11 +31,11 @@ import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
-import org.eclipse.jetty.util.log.Log;
-
 public class DatabaseDBObjectModel implements DBObjectModel {
-	
-	private Connection cxn;
+
+    public static Logger Log = Logger.getLogger(DatabaseDBObjectModel.class);
+
+    private Connection cxn;
 	
 	public DatabaseDBObjectModel(DataSource source) throws DBModelException { 
 		try {

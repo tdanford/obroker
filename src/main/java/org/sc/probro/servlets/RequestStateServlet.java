@@ -21,7 +21,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,8 +31,10 @@ import org.sc.probro.utils.Pairing;
 import org.sc.probro.utils.StateMachine;
 
 public class RequestStateServlet extends SkeletonServlet {
-	
-	public static Numbering<String> STATES;
+
+    private Logger Log = Logger.getLogger(RequestStateServlet.class);
+
+    public static Numbering<String> STATES;
 	public static StateMachine MACHINE;
 	
 	static { 
