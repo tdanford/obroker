@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+         http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd">
+
+<!--
+js.addServlet("States", new RequestStateServlet(), "/states");
+		js.addServlet("Proteins", new BiothesaurusQueryServlet(props), "/proteins/*");
+		js.addServlet("Test", new TestServlet(), "/test/*");
+		js.addServlet("Reset", new ResetServlet(props), "/reset/*");
+		js.addServlet("Admin", new AdminServlet(props), "/admin/*");
+
+		// These are the old servlets.
+		//js.addServlet("Request", new RequestServlet(props), "/request/*");		
+		//js.addServlet("TextQuery", new TextQueryServlet(props), "/query");
+		//js.addServlet("Requests", new RequestListServlet(props), "/requests");
+		//js.addServlet("Ontology", new DBObjectServlet<OntologyObject>(props, OntologyObject.class, "ontology_id"), "/ontology/*");		
+		//js.addServlet("Ontologies", new OntologyListServlet(props), "/ontologies");
+		//js.addServlet("User", new DBObjectServlet<UserObject>(props, UserObject.class, "user_id"), "/user/*");
+		//js.addServlet("Users", new DBObjectListServlet<UserObject>(props, UserObject.class), "/users");
+
+		js.addServlet("BulkRequests", new BulkRequestServlet(props), "/bulk-requests");
+		js.addServlet("TextQuery", new TextQueryServlet(props), "/query");
+		js.addServlet("Request", new RequestServlet(props), "/request/*");		
+		js.addServlet("Requests", new RequestListServlet(props), "/requests/*");
+		js.addServlet("Ontology", new OntologyServlet(props), "/ontology/*");
+		js.addServlet("Ontologies", new OntologyListServlet(props), "/ontologies/*");
+		js.addServlet("User", new UserServlet(props), "/user/*");
+		js.addServlet("Users", new UserListServlet(props), "/users/*");
+		js.addServlet("Supervisor", new SupervisorServlet(), "/supervisor/*");
+		js.addServlet("OntologyFields", new OntologyFieldServlet(props), "/ontologyfields/*");
+
+		js.addServlet("IndexCreator", new IndexCreatorServlet(props), "/indexer/*");
+-->
+
+	<servlet>
+		<servlet-name>testServlet</servlet-name>
+		<servlet-class>org.sc.probro.servlets.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>testServlet</servlet-name>
+		<url-pattern>/test/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>
+

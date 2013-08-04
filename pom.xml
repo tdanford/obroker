@@ -4,8 +4,8 @@
 
 	<groupId>tdanford</groupId>
 	<artifactId>obroker</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>1.0.2-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>obroker</name>
 
