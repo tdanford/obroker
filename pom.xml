@@ -38,16 +38,14 @@
 
 		<!-- Custom Dependencies -->
 		<dependency>
-			<artifactId>tdanford</artifactId>
-			<groupId>java-json-schema</groupId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/java-json-schema.jar</systemPath>
+			<groupId>tdanford</groupId>
+			<artifactId>java-json-schema</artifactId>
+			<version>1.0.1</version>
 		</dependency>	
 
 		<dependency>
-			<artifactId>tdanford</artifactId>
-			<groupId>obo-parser</groupId>
+			<groupId>tdanford</groupId>
+			<artifactId>obo-parser</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/lib/obo-parser.jar</systemPath>
