@@ -18,7 +18,6 @@ package org.sc.probro;
 import java.util.Collection;
 
 import org.json.JSONObject;
-import org.junit.experimental.theories.Theories;
 import org.sc.obo.OBOOntology;
 import org.sc.probro.exceptions.BadRequestException;
 import org.sc.probro.exceptions.BrokerException;

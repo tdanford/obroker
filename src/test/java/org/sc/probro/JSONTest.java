@@ -39,6 +39,13 @@ public class JSONTest {
 	@Test 
 	public void testJSONSchemas() throws IOException {
 		BrokerSchemaEnv env = new BrokerSchemaEnv();
+
+        assertNotNull(env.getRequestType());
+        assertNotNull(env.getMetadataType());
+        assertNotNull(env.getUserType());
+        assertNotNull(env.getSearchResultType());
+        assertNotNull(env.getOntologyType());
+        assertNotNull(env.getLinkType());
 		
 		testContains(env.getMetadataType(), new MetadataExample());
 		testContains(env.getRequestType(), new RequestExample());
@@ -47,14 +54,17 @@ public class JSONTest {
 		testContains(env.getLinkType(), new LinkExample());
 	}
 	
-	public void testContains(JSONType type, Object value) { 
+	public void testContains(JSONType type, Object value) {
+        assertNotNull(type);
 		assertTrue(type.contains(value), type.explain(value));
 	}
 }
 
 class BrokerSchemaEnv extends SchemaEnv { 
 	public BrokerSchemaEnv() { 
-		super(new File("docs/json-schemas/"));
+		super(new File("src/main/resources/schemas"));
+
+        System.out.println(String.format("DIR: " + (new File("src/main/resources/schemas")).getAbsolutePath()));
 	}
 	
 	public JSONType getRequestType() { return lookupType("Request"); } 
@@ -75,7 +85,7 @@ class UserExample extends JSONObject {
 	public UserExample() { 
 		try {
 			put("user_id", 1);
-			put("user_name", "Test Name");
+			put("name", "Test Name");
 		} catch (JSONException e) {
 			throw new IllegalStateException(e);
 		}
@@ -103,10 +113,9 @@ class RequestExample extends JSONObject {
 			put("provenance", "http://example.com/blah");
 			put("date_submitted", "2010-09-01");
 			put("status", 200);
-			put("ontology_id", "grok");
-			put("provisional_id", "quux");
-			
-			put("created_by", 10);
+			put("ontology", new LinkExample("http://ontologies.org/grok"));
+			put("provisional_term", "quux");
+            put("creator", new LinkExample("http://users.org/10"));
 			
 			append("metadata", new MetadataExample(this, "akey", "bvalue"));
 			append("metadata", new MetadataExample(this, "ckey", "dvalue"));
