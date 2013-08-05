@@ -26,21 +26,9 @@ import org.sc.probro.exceptions.BrokerException;
 
 public class TestServlet extends SkeletonServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		try { 
-			try {
-				JSONObject obj = this.getLocalJSON(request, "/states?format=json");
-				
-				response.setStatus(HttpServletResponse.SC_OK);
-				response.setContentType("application/json");
-				response.getWriter().println(obj.toString());
-				
-			} catch (JSONException e) {
-				throw new BrokerException(e);
-			}
-		} catch(BrokerException e) { 
-			handleException(response, e);
-			return;
-		}
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/plain");
+        response.getWriter().println("OK");
+    }
 }
