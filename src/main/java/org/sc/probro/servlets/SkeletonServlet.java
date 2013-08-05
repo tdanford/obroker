@@ -56,6 +56,7 @@ import org.sc.probro.data.DBObject;
 import org.sc.probro.data.RequestObject;
 import org.sc.probro.exceptions.BrokerException;
 
+import tdanford.json.schema.JSONResourceType;
 import tdanford.json.schema.SchemaEnv;
 
 public abstract class SkeletonServlet extends HttpServlet {
@@ -70,7 +71,17 @@ public abstract class SkeletonServlet extends HttpServlet {
 	
     public void init() throws ServletException {
     	super.init();
-    	schemaEnv = new SchemaEnv(new File("docs/json-schemas"));
+    	schemaEnv = new SchemaEnv();
+
+        schemaEnv.addType("Link", new JSONResourceType(schemaEnv, "schemas/Link.js"));
+        schemaEnv.addType("User", new JSONResourceType(schemaEnv, "schemas/User.js"));
+        schemaEnv.addType("Metadata", new JSONResourceType(schemaEnv, "schemas/Metadata.js"));
+        schemaEnv.addType("Ontology", new JSONResourceType(schemaEnv, "schemas/Ontology.js"));
+        schemaEnv.addType("Request", new JSONResourceType(schemaEnv, "schemas/Request.js"));
+        schemaEnv.addType("SearchResult", new JSONResourceType(schemaEnv, "schemas/SearchResult.js"));
+
+        // TODO need to add the ability to SchemaEnv, to load Schemas from the classpath
+        // TODO and then this class needs to manually load all the relevant schemas from the classpath.
     }
 	
 	public static final String CONTENT_TYPE_JSON = "application/json";
